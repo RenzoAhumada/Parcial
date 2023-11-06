@@ -2,11 +2,12 @@
 package integrador.objects;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 
 public class Biblioteca {
-   private List <Usuario> usuarios = new ArrayList<>();
-   private List <Libro> libros = new ArrayList<>();
+    private final List<Usuario> usuarios = new ArrayList<>();
+    private final List<Libro> libros = new ArrayList();
 
     public Biblioteca() {
     }
@@ -14,28 +15,49 @@ public class Biblioteca {
     public List<Usuario> getUsuarios() {
         return usuarios;
     }
-
-    public void setUsuarios(List<Usuario> usuarios) {
-        this.usuarios = usuarios;
-    }
-
+    
     public List<Libro> getLibros() {
         return libros;
     }
 
-    public void setLibros(List<Libro> libros) {
-        this.libros = libros;
-    }
-
-    public void viewBooks(){
-        
-        System.out.println("Ingrese el titulo del libro a buscar");
-        
-    }
-    
-    public void viewUser(int userRegister){  
-        for (int i = 0; i < userRegister; i++){
-        usuarios.get(i);   
+    public void newBook() {
+    try {
+        Libro book = new Libro();
+        book.newBook();
+        libros.add(book);
+    } catch (InputMismatchException e) {
+        System.out.println("Error en el sistema, no se pudo completar la creación.");
     }
 }
+
+    public void newUser() {
+        try {
+            Usuario user = new Usuario();
+            user.NewUser();  
+            usuarios.add(user);
+        } catch (InputMismatchException e) {
+            System.out.println("Error al crear el usuario.");
+        }
+    }
+
+    public void viewUsers() {
+        System.out.println("Lista de Usuarios:");
+        for (Usuario user : usuarios) {
+            user.viewUser();
+        }
+    }
+
+    public void viewBooks() {
+        System.out.println("Lista de Libros:");
+        for (Libro libro : libros) {
+            libro.viewBooks();
+        }
+    }
+ public Libro buscarLibro(String titulo) {
+        for (Libro libro : libros) {
+            if (libro.getTitulo().equalsIgnoreCase(titulo)) {
+                return libro;
+            }
+        }
+        return null;    }
 }

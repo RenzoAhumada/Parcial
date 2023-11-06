@@ -1,38 +1,22 @@
 
 package integrador.objects;
 
-import java.util.Scanner;
 
-
-public class Prestamo extends Libro {
-    private boolean pass=true;
-
-    public Prestamo() {
-    }
-
-    public boolean isPass() {
-        return pass;
-    }
-
-    public void setPass(boolean pass) {
-        this.pass = pass;
-    }
-
-    public Scanner getSc() {
-        return sc;
-    }
-
-    public void setSc(Scanner sc) {
-        this.sc = sc;
-    }
-    
-    public void bookPass(){
-        Libro book = new Libro();
+public class Prestamo {
+    public void bookPass(String titulo, Biblioteca biblioteca) {
         Exeptions e = new Exeptions();
-        if(book.getCuantityBooks()==0){
-            e.exceptionForPrestamo();
-        }else{
-            book.setCuantityBooks(book.getCuantityBooks()-1);           
+
+        Libro foundBook = biblioteca.buscarLibro(titulo);
+
+        if (foundBook != null) {
+            if (foundBook.getCuantityBooks() > 0) {
+                foundBook.setCuantityBooks(foundBook.getCuantityBooks() - 1);
+                System.out.println("Libro prestado con éxito.");
+            } else {
+                e.exceptionForPrestamo();
+            }
+        } else {
+            System.out.println("Libro no encontrado en la biblioteca.");
         }
-}
+    }
 }

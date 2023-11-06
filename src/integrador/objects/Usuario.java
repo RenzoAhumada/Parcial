@@ -43,7 +43,7 @@ public class Usuario {
         return identificacion;
     }
 
-    public void setNewUser() {
+    public void NewUser() {
         try{
         System.out.println("Ingrese nombre de usuario: ");
         nombre = sc.next();
